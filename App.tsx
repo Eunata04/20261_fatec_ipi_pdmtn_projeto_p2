@@ -11,6 +11,19 @@ import {
 export default function App() {
 
   const [nomePais, setNomePais] = useState('')
+  const [dadosPais, setDadosPais] = useState<any>(null)
+
+  const buscarPais = async () => {
+
+    const url = `https://restcountries.com/v3.1/name/${nomePais}`
+
+    const response = await fetch(url)
+
+    const data = await response.json()
+
+    setDadosPais(data[0])
+
+  }
 
   return (
     <View style={styles.container}>
@@ -30,11 +43,26 @@ export default function App() {
         onChangeText={setNomePais}
       />
 
-      <Pressable style={styles.button}>
+      <Pressable
+        style={styles.button}
+        onPress={buscarPais}
+      >
         <Text style={styles.buttonText}>
           Buscar País
         </Text>
       </Pressable>
+
+      {dadosPais && (
+        <>
+          <Text>
+            Nome comum: {dadosPais.name.common}
+          </Text>
+
+          <Text>
+            Nome oficial: {dadosPais.name.official}
+          </Text>
+        </>
+      )}
 
     </View>
   )
@@ -64,7 +92,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     width: '80%',
     padding: 10,
-    marginBottom: 10,
     borderRadius: 4,
   },
 
@@ -74,6 +101,7 @@ const styles = StyleSheet.create({
     padding: 12,
     borderRadius: 4,
     alignItems: 'center',
+    marginTop: 10,
   },
 
   buttonText: {
