@@ -14,6 +14,7 @@ export default function App() {
   const [dadosPais, setDadosPais] = useState<any>(null)
 
   const [capital, setCapital] = useState('')
+  const [dadosCapital, setDadosCapital] = useState<any>(null)
 
   const buscarPais = async () => {
 
@@ -24,6 +25,18 @@ export default function App() {
     const data = await response.json()
 
     setDadosPais(data[0])
+
+  }
+
+  const buscarCapital = async () => {
+
+    const url = `https://restcountries.com/v3.1/capital/${capital}`
+
+    const response = await fetch(url)
+
+    const data = await response.json()
+
+    setDadosCapital(data[0])
 
   }
 
@@ -85,11 +98,17 @@ export default function App() {
         onChangeText={setCapital}
       />
 
-      <Pressable style={styles.button}>
+      <Pressable style={styles.button} onPress={buscarCapital}>
         <Text style={styles.buttonText}>
           Buscar Capital
         </Text>
       </Pressable>
+
+      {dadosCapital && (
+        <Text>
+          Nome oficial: {dadosCapital.name.official}
+        </Text>
+      )}
 
     </View>
   )
