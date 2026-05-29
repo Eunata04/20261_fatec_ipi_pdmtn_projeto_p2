@@ -13,6 +13,8 @@ export default function App() {
   const [nomePais, setNomePais] = useState('')
   const [dadosPais, setDadosPais] = useState<any>(null)
 
+  const [capital, setCapital] = useState('')
+
   const buscarPais = async () => {
 
     const url = `https://restcountries.com/v3.1/name/${nomePais}`
@@ -72,6 +74,23 @@ export default function App() {
         </>
       )}
 
+      <Text style={styles.titulo}>
+        Busca por Capital
+      </Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder='Digite a capital'
+        value={capital}
+        onChangeText={setCapital}
+      />
+
+      <Pressable style={styles.button}>
+        <Text style={styles.buttonText}>
+          Buscar Capital
+        </Text>
+      </Pressable>
+
     </View>
   )
 
@@ -94,6 +113,7 @@ const styles = StyleSheet.create({
   titulo: {
     fontSize: 20,
     marginBottom: 10,
+    marginTop: 20,
   },
 
   input: {
