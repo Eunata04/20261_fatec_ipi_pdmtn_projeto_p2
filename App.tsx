@@ -6,6 +6,7 @@ import {
   View,
   TextInput,
   Pressable,
+  Image,
 } from 'react-native';
 
 export default function App() {
@@ -105,9 +106,16 @@ export default function App() {
       </Pressable>
 
       {dadosCapital && (
-        <Text>
-          Nome oficial: {dadosCapital.name.official}
-        </Text>
+        <>
+          <Text>
+            Nome oficial: {dadosCapital.name.official}
+          </Text>
+
+          <Image
+            source={{ uri: dadosCapital.flags.png }}
+            style={styles.flag}
+          />
+        </>
       )}
 
     </View>
@@ -154,6 +162,12 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     fontWeight: 'bold',
+  },
+
+  flag: {
+    width: 200,
+    height: 120,
+    marginTop: 10,
   },
 
 })
