@@ -61,6 +61,14 @@ export default function App() {
           <Text>
             Nome oficial: {dadosPais.name.official}
           </Text>
+
+          <Text>
+            Nome russo: {dadosPais.translations.rus.common}
+          </Text>
+
+          <Text>
+            OpenStreetMap: {dadosPais.maps.openStreetMaps}
+          </Text>
         </>
       )}
 
